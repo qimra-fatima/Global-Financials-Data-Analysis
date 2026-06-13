@@ -1,60 +1,29 @@
-PORTFOLIO PROJECT: GLOBAL CORPORATE FINANCIAL DATA ANALYSIS
-BACKEND SQL SCRIPTS & DATABASE LOGIC
-========================================================================
-
--- DATA TABLE SCHEMA (financials Table)
--- Column Structure:
---   Country (VARCHAR)  -> Geographic region
---   Product (VARCHAR)  -> Commercial product line
---   Units_Sold (INT)   -> Volume distributed
---   Sales (DECIMAL)    -> Top-line gross revenue
---   Profit (DECIMAL)   -> Bottom-line net profit
-
-========================================================================
-1. EXECUTIVE METRICS (KPI SCORECARDS)
-========================================================================
-
--- Query for the "Sum of Sales" Card (Displays: 118.73M)
-SELECT 
-    SUM(Sales) AS Total_Enterprise_Sales
-FROM 
-    financials;
-
-
--- Query for the "Sum of Profit" Card (Displays: 16.89M)
-SELECT 
-    SUM(Profit) AS Total_Enterprise_Profit
-FROM 
-    financials;
-
-========================================================================
+Portfolio Project: Global Corporate Financial Data Analysis
+Backend SQL Scripts and Database Logic
+    
+-- Data table schema (financials Table)
+-- Column structure:
+--   Country (VARCHAR)  
+--   Product (VARCHAR)  
+--   Units_Sold (INT)   
+--   Sales (DECIMAL)    
+--   Profit (DECIMAL)   
+1. EXECUTIVE METRICS 
+-- Sum of Sales Card
+SELECT SUM(Sales) AS total_enterprise_sales
+FROM financials;
+-- Sum of Profit Card 
+SELECT SUM(Profit) AS total_enterprise_profit
+FROM financials;
 2. GEOGRAPHIC DISTRIBUTION
-========================================================================
-
--- Query for the "Sum of Sales by Country" Bar Chart
--- Groups raw data by country and ranks them from highest to lowest sales
-SELECT 
-    Country,
-    SUM(Sales) AS Total_Country_Sales
-FROM 
-    financials
-GROUP BY 
-    Country
-ORDER BY 
-    Total_Country_Sales DESC;
-
-========================================================================
+-- Used for regional revenue performance
+SELECT Country, SUM(Sales) AS total_country_sales
+FROM financials
+GROUP BY Country
+ORDER BY total_country_sales DESC;
 3. PRODUCT PERFORMANCE
-========================================================================
-
--- Query for the "Sum of Units Sold by Product" Donut Chart
--- Tracks which product lines are driving the highest volume
-SELECT 
-    Product,
-    SUM(Units_Sold) AS Total_Units_Distributed
-FROM 
-    financials
-GROUP BY 
-    Product
-ORDER BY 
-    Total_Units_Distributed DESC;
+-- Used for product volume distribution visual
+SELECT Product, SUM(Units_Sold) AS Total_units_distributed
+FROM financials
+GROUP BY Product
+ORDER BY Total_units_distributed DESC;
